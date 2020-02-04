@@ -6,11 +6,14 @@ import com.whiteboardmaster.WhiteBoardMaster.Models.DiagramRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import java.security.Principal;
 
 @Controller
 public class ApplicationUserController {
@@ -25,7 +28,7 @@ public class ApplicationUserController {
     DiagramRepository diagramRepository;
 
     /*
-                        USER ROUTES
+                        POST ROUTES
      */
     @PostMapping("/user/register")
     public RedirectView register(HttpServletRequest request, String userName, String password, String firstName, String lastName) {
@@ -41,5 +44,16 @@ public class ApplicationUserController {
             e.printStackTrace();
         }
         return new RedirectView("/");
+    }
+
+    @GetMapping("/profile")
+    public String displayProfileDetails(Principal p, Model m) {
+
+        if (p != null) {
+            ApplicationUser user = userRepository.findByUserName(p.getName());
+            m.addAttribute(user);
+
+        }
+        return "profile";
     }
 }
