@@ -3,7 +3,7 @@ package com.whiteboardmaster.WhiteBoardMaster.Models;
 import javax.persistence.*;
 
 @Entity
-public class Diagram {
+public class Board {
 
 
     /*
@@ -25,16 +25,17 @@ public class Diagram {
     private String edgeCases;
     private String inputAndOutput;
     private String visual;
+    private String title;
 
 
     /*
                                 CONSTRUCTORS
     */
-    public Diagram() {
+    public Board() {
 
     }
 
-    public Diagram(ApplicationUser applicationUser, String problemDomain, String algorithm, String pseudoCode, String bigONotation, String verification, String code, String edgeCases, String inputAndOutput, String visual) {
+    public Board(ApplicationUser applicationUser, String problemDomain, String algorithm, String pseudoCode, String bigONotation, String verification, String code, String edgeCases, String inputAndOutput, String visual, String title) {
         this.applicationUser = applicationUser;
         this.problemDomain = problemDomain;
         this.algorithm = algorithm;
@@ -44,6 +45,8 @@ public class Diagram {
         this.code = code;
         this.edgeCases = edgeCases;
         this.inputAndOutput = inputAndOutput;
+        this.visual = visual;
+        this.title = title;
     }
 
 
@@ -89,6 +92,8 @@ public class Diagram {
     public void setVisual(String visual) {
         this.visual = visual;
     }
+
+    public void setTitle(String title) { this.title = title; }
 
 
     /*
@@ -137,4 +142,6 @@ public class Diagram {
     public String getVisual() {
         return visual;
     }
+
+    public String getTitle() { return title; }
 }
